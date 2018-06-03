@@ -29,7 +29,9 @@ var webpackConfig = merge(baseWebpackConfig, {
       }
     ), 
     -->
-  #
+  #pickers npm install mint-ui -S
+  import Mint from 'mint-ui';
+  Vue.use(Mint);
 
 
 

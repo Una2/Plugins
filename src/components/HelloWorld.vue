@@ -1,8 +1,8 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <router-link to="/demo">demo</router-link>
-    <router-link to="/demo1">demo1</router-link>
+    <router-link to="/demovuex">demovuex</router-link>
+    <router-link to="/pageTitle">pageTitle</router-link>
     <router-link to="/demo2">demo2</router-link>
     <router-link to="/pzupload">pzupload</router-link>
     <router-link to="/imgtomd5">imgtomd5</router-link>

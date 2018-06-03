@@ -12,6 +12,13 @@ import store from './components/store/index.js'
 
 import VueX from 'vuex';
 Vue.use(VueX);
+import Mint from 'mint-ui';
+Vue.use(Mint);
+
+Vue.prototype.province={};
+Vue.prototype.cities={};
+Vue.prototype.dists={};
+
 
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false
