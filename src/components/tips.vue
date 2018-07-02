@@ -36,7 +36,7 @@ components:{
     },
     // 显示tips
     showtips() {
-      console.log(this.$refs.dialog,"this.$refs.dialog")
+    //   console.log(this.$refs.dialog,"this.$refs.dialog");
       this.$refs.dialog.showTips();
       $(".modal_box").show();
     }
