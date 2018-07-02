@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    00000000000000
     <h1>{{ msg }}</h1>
     <router-link to="/demovuex">demovuex</router-link>
     <router-link to="/pageTitle">pageTitle</router-link>
@@ -7,6 +8,8 @@
     <router-link to="/pzupload">pzupload</router-link>
     <router-link to="/imgtomd5">imgtomd5</router-link>
     <router-link to="/paizhao">paizhao</router-link>
+    <router-link to="/getlocation">getlocation</router-link>
+    <router-link to="/tips">弹窗模态框</router-link>
     
   </div>
 </template>
@@ -18,6 +21,9 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  mounted(){
+
   }
 }
 </script>

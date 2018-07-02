@@ -32,7 +32,9 @@ export default {
     };
   },
   mounted() {
-  
+  if(Vue.prototype.province=="{}"){
+    Vue.prototype.province=sessionStorage.getItem("province");
+  }
   },
   methods: {
     close() {

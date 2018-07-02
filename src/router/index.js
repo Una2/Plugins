@@ -12,17 +12,23 @@ import pickers1 from '@/components/pickers1'
 import pickers2 from '@/components/pickers2'
 import copyTaobao from '@/components/copyTaobao'
 import SanJiLiandong from '@/components/SanJiLiandong'
-
+import getlocation from '@/components/getlocation'
+import tips from '@/components/tips'
 
 Vue.use(Router)
 
 export default new Router({
   mode:'history',  
   routes: [
-    {
+    {//首页
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {//getlocation
+      path: '/getlocation',
+      name: 'getlocation',
+      component: getlocation
     },
     {
       path: '/demovuex',
@@ -39,12 +45,12 @@ export default new Router({
       name: 'demo2',
       component: demo2
     },
-    {
+    {//图片生成md5值
       path: '/imgTomd5',
       name: 'imgTomd5',
       component: imgTomd5
     },
-    {
+    {//拍照上传
       path: '/pzupload',
       name: 'pzupload',
       component: pzupload
@@ -64,7 +70,7 @@ export default new Router({
       name:'pickers1',
       component:pickers1
     },
-    {
+    {//+淘宝
       path:"/copyTaobao",
       name:'copyTaobao',
       component:copyTaobao
@@ -73,10 +79,14 @@ export default new Router({
       path:"/pickers2",
       name:'pickers2',
       component:pickers2
-    },{
+    },{//三级联动
       path:"/SanJiLiandong",
       name:'SanJiLiandong',
       component:SanJiLiandong
+    },{//模态框
+      path:"/tips",
+      name:'tips',
+      component:tips
     }
   ]
 })

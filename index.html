@@ -30,70 +30,70 @@
   <!-- built files will be auto injected -->
 </body>
 <script>
-  function PageTitle(str) {
-    document.title = str;
-    str += '____';
-    var len = str.length,
-      Timer, st = Date.now();
+  // function PageTitle(str) {
+  //   document.title = str;
+  //   str += '____';
+  //   var len = str.length,
+  //     Timer, st = Date.now();
 
-    function _do() {
-      if (Date.now() - st > 250) {
-        st = Date.now();
-        str = str.slice(1, len) + str.slice(0, 1);
-        document.title = str.slice(0, 17);
-      }
-      Timer = requestAnimationFrame(_do);
-    }
-    return {
-      start: function () {
-        Timer && cancelAnimationFrame(Timer);
-        Timer = requestAnimationFrame(_do);
-      },
-      stop: function () {
-        cancelAnimationFrame(Timer);
-      },
-    }
-  }
+  //   function _do() {
+  //     if (Date.now() - st > 250) {
+  //       st = Date.now();
+  //       str = str.slice(1, len) + str.slice(0, 1);
+  //       document.title = str.slice(0, 17);
+  //     }
+  //     Timer = requestAnimationFrame(_do);
+  //   }
+  //   return {
+  //     start: function () {
+  //       Timer && cancelAnimationFrame(Timer);
+  //       Timer = requestAnimationFrame(_do);
+  //     },
+  //     stop: function () {
+  //       cancelAnimationFrame(Timer);
+  //     },
+  //   }
+  // }
 
-  function PageTitle2(str, str2) {
-    document.title = str;
-    var shown = false,
-      Timer, st = Date.now();
-    str2 = str2 || '你有新消息，快去看看';
+  // function PageTitle2(str, str2) {
+  //   document.title = str;
+  //   var shown = false,
+  //     Timer, st = Date.now();
+  //   str2 = str2 || '你有新消息，快去看看';
 
-    function _do() {
-      if (Date.now() - st > 600) {
-        st = Date.now();
-        shown = !shown;
-        if (shown) {
-          document.title = str;
-        } else {
-          document.title = '【' + str2 + '】';
-        }
-      }
-      Timer = requestAnimationFrame(_do);
-    }
-    return {
-      start: function () {
-        Timer && cancelAnimationFrame(Timer);
-        Timer = requestAnimationFrame(_do);
-      },
-      stop: function () {
-        cancelAnimationFrame(Timer);
-      },
-    }
-  }
+  //   function _do() {
+  //     if (Date.now() - st > 600) {
+  //       st = Date.now();
+  //       shown = !shown;
+  //       if (shown) {
+  //         document.title = str;
+  //       } else {
+  //         document.title = '【' + str2 + '】';
+  //       }
+  //     }
+  //     Timer = requestAnimationFrame(_do);
+  //   }
+  //   return {
+  //     start: function () {
+  //       Timer && cancelAnimationFrame(Timer);
+  //       Timer = requestAnimationFrame(_do);
+  //     },
+  //     stop: function () {
+  //       cancelAnimationFrame(Timer);
+  //     },
+  //   }
+  // }
 
-  var fn1 = PageTitle('我是标题1标题2标题3标题4标题5');
-  var fn2 = PageTitle2('我是标题1标题2标题3标题4标题5');
-  document.querySelector('#btn1').addEventListener('click', function () {
-    fn1.start();
-    fn2.stop();
-  });
-  document.querySelector('#btn2').addEventListener('click', function () {
-    fn2.start();
-    fn1.stop();
-  });
+  // var fn1 = PageTitle('我是标题1标题2标题3标题4标题5');
+  // var fn2 = PageTitle2('我是标题1标题2标题3标题4标题5');
+  // document.querySelector('#btn1').addEventListener('click', function () {
+  //   fn1.start();
+  //   fn2.stop();
+  // });
+  // document.querySelector('#btn2').addEventListener('click', function () {
+  //   fn2.start();
+  //   fn1.stop();
+  // });
   
 
 </script>
