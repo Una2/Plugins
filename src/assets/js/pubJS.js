@@ -45,20 +45,20 @@ function getHeaders(obj) {
  * @param {*} err  失败回调
  */
 export function require(url, type, obj, params, succ, err) {
-	const headers = getHeaders(obj);
-	$.ajax({
-		url: baseIP + url,
-		type: type,
-		headers: headers,
-		dataType: 'json',
-		data: params,
-		success: function(res) {
-			succ(res);
-		},
-		error: function(err) {
-			err(err);
-		}
-	});
+  const headers = getHeaders(obj);
+  $.ajax({
+    url: baseIP + url,
+    type: type,
+    headers: headers,
+    dataType: 'json',
+    data: params,
+    success: function (res) {
+      succ(res);
+    },
+    error: function (err) {
+      err(err);
+    }
+  });
 }
 
 /**
@@ -70,15 +70,15 @@ export function require(url, type, obj, params, succ, err) {
  * @param {*} err  失败回调
  */
 export function require_get(url, obj, params, succ, err) {
-	const headers = getHeaders(obj);
-	vue.prototype.$axios
-		.get(baseIP + url, {
-			headers: headers,
-			params: params
-		})
-		.then((res) => {
-			succ(res.data);
-		});
+  const headers = getHeaders(obj);
+  vue.prototype.$axios
+    .get(baseIP + url, {
+      headers: headers,
+      params: params
+    })
+    .then((res) => {
+      succ(res.data);
+    });
 }
 
 /**
@@ -90,14 +90,14 @@ export function require_get(url, obj, params, succ, err) {
  * @param {*} err  失败回调
  */
 export function require_post(url, obj, params, succ, err) {
-	const headers = getHeaders(obj);
-	vue.prototype.$axios
-		.post(baseIP + url, params, {
-			headers: headers
-		})
-		.then((res) => {
-			succ(res.data);
-		});
+  const headers = getHeaders(obj);
+  vue.prototype.$axios
+    .post(baseIP + url, params, {
+      headers: headers
+    })
+    .then((res) => {
+      succ(res.data);
+    });
 }
 
 /**
@@ -109,14 +109,14 @@ export function require_post(url, obj, params, succ, err) {
  * @param {*} err  失败回调
  */
 export function require_put(url, obj, params, succ, err) {
-	const headers = getHeaders(obj);
-	vue.prototype.$axios
-		.put(baseIP + url, params, {
-			headers: headers
-		})
-		.then((res) => {
-			succ(res.data);
-		});
+  const headers = getHeaders(obj);
+  vue.prototype.$axios
+    .put(baseIP + url, params, {
+      headers: headers
+    })
+    .then((res) => {
+      succ(res.data);
+    });
 }
 
 // export function isWeChat() {
@@ -134,3 +134,35 @@ export function require_put(url, obj, params, succ, err) {
 // 		}
 // 	});
 // }
+
+/*********************************************************
+ * 基础工具
+ * **/
+// 数据类型
+function type(obj) {
+  if (obj == null) {
+    return String(obj);
+  }
+  // 早期的webkit内核浏览器实现了已废弃的ecma262v4标准，可以将正则字面量当作函数使用，因此typeof在判定正则时会返回function
+  return typeof obj === 'object' || typeof obj === 'function' ? class2type[Object.prototype.toString.call(obj)] || 'object' : typeof obj;
+}
+var xx = null;
+type(xx);
+// 判断是否为空，可判断空数组，空json
+function isEmpty(v) {
+  var type = type(v);
+  if (type === 'undefined' || v === null) {
+    return true;
+  } else if (type === 'number') {
+    return !v && v !== 0;
+  } else if (type === 'array') {
+    return v.length === 0;
+  } else if (type === 'object') {
+    for (var t in v) {
+      return false;
+    }
+    return true;
+  }
+  return !v;
+
+}

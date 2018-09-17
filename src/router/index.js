@@ -14,11 +14,13 @@ import copyTaobao from '@/components/copyTaobao'
 import SanJiLiandong from '@/components/SanJiLiandong'
 import getlocation from '@/components/getlocation'
 import tips from '@/components/tips'
+import amap from '@/components/amap'
+import amap1 from '@/components/amap1'
 
 Vue.use(Router)
 
 export default new Router({
-  mode:'history',  
+  // mode:'history',  
   routes: [
     {//首页
       path: '/',
@@ -29,6 +31,15 @@ export default new Router({
       path: '/getlocation',
       name: 'getlocation',
       component: getlocation
+    },
+    {//高德地图
+      path: '/amap',
+      name: 'amap',
+      component: amap
+    },{//高德地图
+      path: '/amap1',
+      name: 'amap1',
+      component: amap1
     },
     {
       path: '/demovuex',

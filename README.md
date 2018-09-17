@@ -34,7 +34,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   Vue.use(Mint);
 
 
-
+<!-- vue-amap  基于 Vue 2.x 和高德地图的地图组件 -->
 
 
 
