@@ -6,7 +6,7 @@
 </template>
 <script>
 import { Picker } from "mint-ui";
-import myaddress from "../../static/json/pca-code.json"; //引入省市区数据
+import myaddress from "../../../static/json/pca-code.json"; //引入省市区数据
 export default {
   components: {
     "mt-picker": Picker

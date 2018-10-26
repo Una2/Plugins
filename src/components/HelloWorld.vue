@@ -10,6 +10,7 @@
     <router-link to="/paizhao">paizhao</router-link>
     <router-link to="/getlocation">getlocation</router-link>
     <router-link to="/tips">弹窗模态框</router-link>
+    <router-link to="/form">form 表单</router-link>
     
   </div>
 </template>

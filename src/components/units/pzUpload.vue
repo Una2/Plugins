@@ -15,7 +15,7 @@
   </div>
 </template>
 <script>
-import {EXIF} from '../../static/js/exif'
+import {EXIF} from '../../../static/js/exif'
 export default {
   data() {
     return {};

@@ -12,10 +12,10 @@
 <script>
   import {
     EXIF
-  } from "../../static/js/exif";
+  } from "../../../static/js/exif";
   import {
     hex_md5
-  } from "../assets/js/md5.js";
+  } from "../../assets/js/md5.js";
   export default {
     name: "approve", //人脸认证
     components: {

@@ -9,8 +9,8 @@
 </template>
 <script>
 import Vue from "vue";
-import Pickers from "./common/vuepickers.vue";
-import { encrypt, decrypt, simpleEncrypt } from "../assets/js/secret";
+import Pickers from "../common/vuepickers.vue";
+import { encrypt, decrypt, simpleEncrypt } from "../../assets/js/secret";
 export default {
   name: "information",
   components: {

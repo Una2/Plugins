@@ -1,21 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import demovuex from '@/components/demovuex'
-import pageTitle from '@/components/pageTitle'
-import demo2 from '@/components/demo2'
-import imgTomd5 from '@/components/IMgTomd5'
-import pzupload from '@/components/pzUpload'
-import paizhao from '@/components/paizhao'
-import pickers from '@/components/pickers'
-import pickers1 from '@/components/pickers1'
-import pickers2 from '@/components/pickers2'
-import copyTaobao from '@/components/copyTaobao'
-import SanJiLiandong from '@/components/SanJiLiandong'
-import getlocation from '@/components/getlocation'
-import tips from '@/components/tips'
-import amap from '@/components/amap'
-import amap1 from '@/components/amap1'
+import demovuex from '@/components/units/demovuex'
+import pageTitle from '@/components/units/pageTitle'
+import demo2 from '@/components/units/demo2'
+import imgTomd5 from '@/components/units/IMgTomd5'
+import pzupload from '@/components/units/pzUpload'
+import paizhao from '@/components/units/paizhao'
+import pickers from '@/components/units/pickers'
+import pickers1 from '@/components/units/pickers1'
+import pickers2 from '@/components/units/pickers2'
+import copyTaobao from '@/components/units/copyTaobao'
+import SanJiLiandong from '@/components/units/SanJiLiandong'
+import getlocation from '@/components/units/getlocation'
+import tips from '@/components/units/tips'
+import amap from '@/components/units/amap'
+import amap1 from '@/components/units/amap1'
+import form from '@/components/units/form'
 
 Vue.use(Router)
 
@@ -46,7 +47,7 @@ export default new Router({
       name: 'demovuex',
       component: demovuex
     },
-    {
+    {//标题
       path: '/pageTitle',
       name: 'pageTitle',
       component: pageTitle
@@ -66,12 +67,12 @@ export default new Router({
       name: 'pzupload',
       component: pzupload
     },
-    {
+    {//拍照
       path:"/paizhao",
       name:'paizhao',
       component:paizhao
     },
-    {
+    {//三级联动
       path:"/pickers",
       name:'pickers',
       component:pickers
@@ -98,6 +99,10 @@ export default new Router({
       path:"/tips",
       name:'tips',
       component:tips
+    },{//form表单
+      path:"/form",
+      name:'form',
+      component:form
     }
   ]
 })
