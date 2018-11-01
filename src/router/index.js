@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+// 乱七八糟组件    路由
 import demovuex from '@/components/units/demovuex'
 import pageTitle from '@/components/units/pageTitle'
 import demo2 from '@/components/units/demo2'
@@ -18,16 +18,95 @@ import amap from '@/components/units/amap'
 import amap1 from '@/components/units/amap1'
 import form from '@/components/units/form'
 
+// 项目路由
+import Home from '../pages/home'
+import Sport from '../pages/Sport'
+import Travel from '../pages/Travel'
+import Detail from '../pages/Detail'
+import User from '../pages/User'
+import Login from '../pages/Login'
+import Regist from '../pages/Regist'
+import UserInfo from '../pages/UserInfo'
+import Set from '../pages/Set'
+import Post from '../pages/Post'
+import UserMsg from '../pages/UserMsg'
+import Navbar from '../pages/Navbar'
+import NotFound from '../pages/NotFound'
+
 Vue.use(Router)
 
 export default new Router({
   // mode:'history',  
   routes: [
     {//首页
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      path:"/",
+      name:"home",
+      component:Home
     },
+    {
+      path: '/home',
+      name: 'home',
+      component: Home
+    },
+    {
+      path: '/sport',
+      name: 'sport',
+      component: Sport
+    },
+    {
+      path: '/travel',
+      name: 'travel',
+      component: Travel
+    },
+    {
+      path: '/sport/:id',
+      name: 'sport-detail',
+      component: Detail
+    },
+    {
+      path: '/travel/:id',
+      name: 'travel-detail',
+      component: Detail
+    },
+    {
+      path: '/user',
+      name: 'user',
+      component: User
+    },
+    {
+      path: '/user/login',
+      component: Login
+    },
+    {
+      path: '/user/regist',
+      component: Regist
+    },
+    {
+      path: '/user/info',
+      component: UserInfo
+    },
+    {
+      path: '/user/set',
+      component: Set
+    },
+    {
+      path: '/user/post',
+      component: Post
+    },
+    {
+      path: '/user/msg',
+      component: UserMsg
+    },
+    {
+      path: '/user/navbar',
+      component: Navbar
+    },
+    {
+      path: '*',
+      name: 'notfound',
+      component: NotFound
+    },
+    // 乱七八糟组件路由
     {//getlocation
       path: '/getlocation',
       name: 'getlocation',
@@ -41,11 +120,6 @@ export default new Router({
       path: '/amap1',
       name: 'amap1',
       component: amap1
-    },
-    {
-      path: '/demovuex',
-      name: 'demovuex',
-      component: demovuex
     },
     {//标题
       path: '/pageTitle',

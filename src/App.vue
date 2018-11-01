@@ -1,230 +1,158 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <v-toast v-show="showToast"></v-toast>
+    <v-alert v-show="showAlert"></v-alert>
+    <v-loading v-show="loading"></v-loading>
+
+    <v-header :title="title" :menu-display="menuDisplay" :back-display="backDisplay" :map-display="mapDisplay"></v-header>
+    <div class="content" :class="{tabar: tabar}">
+      <transition name="slide-left">
+        <router-view></router-view>
+      </transition>  
+    </div>
+    <v-tabar></v-tabar>
+    <v-sidebar></v-sidebar>
   </div>
 </template>
 
 <script>
-import Vue from 'vue';
+import tabar from "@/components/tabar";
+import header from "@/components/header";
+import sidebar from "@/components/sidebar";
+import toast from "@/components/toast";
+import alert from "@/components/alert";
+import loading from "@/components/loading";
+
+import { mapGetters, mapActions } from "vuex";
+
 export default {
-  name: 'App',
-  data(){
-    return{
-      token:"0a2b2a57-d4b5-4567-b9d9-799e29a6ba78",
-      province: [],
-      city: [],
-      dist: [],
-      shi:{},
-      qu:{},
-      showFlag: true,
+  name: "app",
+  components: {
+    "v-tabar": tabar,
+    "v-header": header,
+    "v-sidebar": sidebar,
+    "v-toast": toast,
+    "v-alert": alert,
+    "v-loading": loading
+  },
+  data() {
+    return {};
+  },
+  watch: {
+    // 如果路由有变化，会再次执行该方法
+    $route: "hideMenuSlide"
+  },
+  methods: {
+    ...mapActions({ setNavState: "setNavState" }),
+    // 隐藏MenuSlide
+    hideMenuSlide() {
+      this.setNavState(false);
     }
   },
-  mounted(){
-    console.log(1111111)
+  computed: {
+    ...mapGetters(["loading", "showToast", "showAlert"]),
+    title() {
+      switch (this.$route.path.split("/")[1]) {
+        case "":
+          return "Qu约";
+        case "home":
+          return "Qu约";
+        case "sport":
+          return "约跑";
+        case "travel":
+          return "约行";
+        case "user":
+          return "我的";
+      }
+    },
+    tabar() {
+      return this.$route.path.split("/").length > 2 ? false : true;
+    },
+    menuDisplay() {
+      if (this.$route.path.split("/")[1] == "home") {
+        return false;
+      }
+      return this.$route.path.split("/").length > 2 ? false : true;
+    },
+    backDisplay() {
+      return this.$route.path.split("/").length > 2 ? true : false;
+    },
+    mapDisplay() {
+      if (this.$route.path.split("/")[1] == "home") {
+        return true;
+      }
+      return false;
+    }
   }
-  // mounted() {
-  //   var self=this;
-  //   if(JSON.stringify(Vue.prototype.province)=='{}'||JSON.stringify(Vue.prototype.cities)=="{}"||JSON.stringify(Vue.prototype.dists)=="{}"){   
-
-  //   $.ajax({
-  //     url: "/api/app/appserver/pub/crm/findDmAreaInfo?flag=province",
-  //     type: "get",
-  //     dataType: "json",
-  //     headers: {
-  //       Authorization: "Bearer " + self.token,
-  //       access_token: self.token,
-  //       "content-type": "application/json;charset=UTF-8",
-  //       channel: "16",
-  //       channel_no: "31"
-  //     },
-  //     success: function(res) {
-  //       console.log(res, "省信息");
-  //       if (res.head && res.head.retFlag == "00000" && res.body) {
-  //         //  self.province=res.body;
-  //         for (var k = 0; k < res.body.length; k++) {
-  //           var obj={};
-  //           obj.text=res.body[k].areaName;
-  //           obj.value= res.body[k].areaCode;
-  //           self.province.push(obj);
-  //           // self.province.push({
-  //           //   text: res.body[k].areaName,
-  //           //   value: res.body[k].areaCode
-  //           // });
-  //         }
-  //         Vue.prototype.province=self.province;
-  //         sessionStorage.setItem("province",JSON.stringify(self.province))
-  //         console.log(self.province, "province");
-  //       } else {
-  //         alert("系统异常");
-  //       }
-  //     },
-  //     error: function(error) {
-  //       console.log(error);
-  //     }
-  //   })
-  //     .then(function() {
-  //       $.ajax({
-  //         url: "/api/app/appserver/pub/crm/findDmAreaInfo?flag=city",
-  //         type: "get",
-  //         dataType: "json",
-  //         headers: {
-  //           Authorization: "Bearer " + self.token,
-  //           access_token: self.token,
-  //           "content-type": "application/json;charset=UTF-8",
-  //           channel: "16",
-  //           channel_no: "31"
-  //         },
-  //         success: function(res) {
-  //           // console.log(res, "市信息");
-  //           if (res.head && res.head.retFlag == "00000" && res.body) {
-  //             for (var l = 0; l < res.body.length; l++) {
-  //               var obj={};
-  //               obj.text= res.body[l].areaName;
-  //               obj.value= res.body[l].areaCode;
-  //               obj.areaParentCode= res.body[l].areaParentCode;
-  //                self.city.push(obj)
-  //             }
-  //             // console.log(self.city, "city");
-  //           } else {
-  //             alert("系统异常");
-  //           }
-  //         },
-  //         error: function(error) {
-  //           console.log(error);
-  //         }
-  //       });
-  //     })
-  //     .then(function() {
-  //       $.ajax({
-  //         url: "/api/app/appserver/pub/crm/findDmAreaInfo?flag=area",
-  //         type: "get",
-  //         dataType: "json",
-  //         headers: {
-  //           Authorization: "Bearer " + self.token,
-  //           access_token: self.token,
-  //           "content-type": "application/json;charset=UTF-8",
-  //           channel: "16",
-  //           channel_no: "31"
-  //         },
-  //         success: function(res) {
-  //           // console.log(res, "区信息");
-  //           if (res.head && res.head.retFlag == "00000" && res.body) {
-  //             for (var m = 0; m < res.body.length; m++) {
-  //               var obj={};
-  //               obj.text= res.body[m].areaName;
-  //               obj.value= res.body[m].areaCode;
-  //               obj.areaParentCode=res.body[m].areaParentCode;
-  //               self.dist.push(obj);
-  //               // self.dist.push({
-  //               //   text: res.body[m].areaName,
-  //               //   value: res.body[m].areaCode,
-  //               //   areaParentCode: res.body[m].areaParentCode
-  //               // });
-  //             }
-  //             //  self.dist=res.body;
-  //             // console.log(self.dist, "dist");
-  //           } else {
-  //             alert("系统异常");
-  //           }
-  //         },
-  //         error: function(error) {
-  //           console.log(error);
-  //         }
-  //       }).then(function() {
-  //         var sheng = [];
-  //         var Proshi = [];
-  //         var Proqu = [];
-  //         var shi = {};
-  //         var qu = {};
-  //         var length1 = self.province.length;
-  //         var length2 = self.city.length;
-  //         var length3 = self.dist.length;
-  //         //  console.log(self.province[0].value)
-  //         for (var i = 0; i < length1; i++) {
-  //           //省
-  //           for (var j = 0; j < length2; j++) {
-  //             // 市
-  //             if (self.province[i].value == self.city[j].areaParentCode) {
-  //               Proshi.push(self.city[j]); //取到相同市
-  //             } 
-  //           }
-  //           shi[self.province[i].value] = Proshi;   Proshi=[];
-  //           // console.log(shi,"shi")
-  //         }
-
-  //       for(var m=0;m<length2;m++){
-  //         for(var n=0;n<length3;n++){
-  //           if (self.city[m].value == self.dist[n].areaParentCode) {
-  //             Proqu.push(self.dist[n]); //取到相同区
-  //           }
-  //         }
-  //         qu[self.city[m].value] = Proqu; Proqu=[];
-  //       }
-
-
-  //         self.shi = shi;
-  //         self.qu = qu;
-  //         sessionStorage.setItem("country",JSON.stringify(self.shi))
-  //         sessionStorage.setItem("area",JSON.stringify(self.qu))
-          
-  //         console.log(shi, "shi");
-  //         console.log(qu, "qu");
-  //         Vue.prototype.cities=shi;
-  //         Vue.prototype.dists=qu;
-  //       });
-  //     })
-  //     .then(function() {
-  //       // var sheng = [];
-  //       // var shi = [];
-  //       // var qu = [];
-  //       // var length1 = self.province.length;
-  //       // var length2 = self.city.length;
-  //       // var length3 = self.dist.length;
-  //       // //  console.log(self.province[0].value)
-  //       // for (var i = 0; i < length1; i++) {
-  //       //   //省
-  //       //   //  console.log(self.province[i].value)
-  //       //   // sheng.push({text:self.province[i].areaName,value:self.province[i].areaCode});
-  //       //   for (var j = 0; j < length2; j++) {
-  //       //     // 市
-  //       //     console.log(self.province[i].value,"1");
-  //       //     console.log(self.city[j].areaParentCode,"2")
-  //       //     if (self.province[i].value == self.city[j].areaParentCode) {
-  //       //       var key=self.province[i].value;
-  //       //       alert(key)
-  //       //       console.log(key,"key")
-  //       //       // shi.key
-  //       //     }
-  //       //   }
-  //       // }
-  //     });
-  //   }
-  // }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss">
+@import "./assets/css/function";
+
+@font-face {
+  font-family: "icon"; /* project id 172436 */
+  src: url("//at.alicdn.com/t/font_w71lovnj7adobt9.eot");
+  src: url("//at.alicdn.com/t/font_w71lovnj7adobt9.eot?#iefix")
+      format("embedded-opentype"),
+    url("//at.alicdn.com/t/font_w71lovnj7adobt9.woff") format("woff"),
+    url("//at.alicdn.com/t/font_w71lovnj7adobt9.ttf") format("truetype"),
+    url("//at.alicdn.com/t/font_w71lovnj7adobt9.svg#iconfont") format("svg");
 }
-*{
-  margin: 0;
-  padding: 0;
+.icon {
+  font-family: "icon" !important;
+  font-size: 18px;
+  font-style: normal;
+  color: #ffffff;
 }
-html,body{
+
+html,
+body {
   height: 100%;
-  /* text-align: center; */
 }
-a{
+
+a.active {
   text-decoration: none;
 }
-li{
-  list-style: none;
+
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  background: #f5f5f5;
+  .content {
+    padding-top: px2rem(100px);
+    background: #f5f5f5;
+  }
+  .tabar {
+    margin-bottom: px2rem(120px);
+  }
+  //渐变动效
+  .slide-left-enter-active,
+  .slide-left-leave-active {
+    transition: all 0.1s ease-in;
+    opacity: 1;
+  }
+  .slide-left-enter,
+  .slide-left-leave-active {
+    opacity: 0;
+  }
+
+  //左滑动效
+  // .slide-left-enter-active {
+  //   animation: slideLeft .3s;
+  // }
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translate3d(100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
 }
 </style>
